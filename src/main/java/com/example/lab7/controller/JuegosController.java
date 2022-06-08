@@ -3,6 +3,7 @@ package com.example.lab7.controller;
 
 import com.example.lab7.entity.Distribuidoras;
 import com.example.lab7.entity.Juegos;
+import com.example.lab7.entity.Plataformas;
 import com.example.lab7.repository.JuegosRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -21,8 +22,8 @@ public class JuegosController {
     @Autowired
     JuegosRepository juegosRepository;
 
-    @GetMapping("/lista/all")
-    public List<Juegos> obtenerTodosLosJuegos() {
+    @GetMapping("/juego")
+    public List<Juegos> obtenerJuegos() {
         return juegosRepository.findAll();
     }
 
