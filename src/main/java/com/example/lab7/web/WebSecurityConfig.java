@@ -26,6 +26,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         http.csrf().disable();
         http.authorizeRequests()
                 .antMatchers("/gameshop4/api/distribuidoras/**").authenticated()
+                .antMatchers("/gameshop4/api/paises/**").authenticated()
                 .anyRequest().permitAll();
         http.httpBasic();
     }
