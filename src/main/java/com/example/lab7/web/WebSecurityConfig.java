@@ -39,5 +39,4 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .usersByUsernameQuery("select correo, password, enabled from usuarios where correo = ?")
                 .authoritiesByUsernameQuery("select correo, autorizacion from usuarios where correo = ?");
     }
-
 }
