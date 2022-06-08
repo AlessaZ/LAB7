@@ -10,6 +10,7 @@ import java.io.Serializable;
 public class Juegos implements Serializable {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int idjuego;
 
     @Size(min = 3, max = 45, message = "Debe contener entre 3 y 45 caracteres")
