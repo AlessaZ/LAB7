@@ -23,5 +23,4 @@ public class JuegosController {
         return juegosRepository.findAll();
     }
 
-
 }
