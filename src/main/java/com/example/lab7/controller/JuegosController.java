@@ -6,6 +6,7 @@ import com.example.lab7.entity.Juegos;
 import com.example.lab7.entity.Plataformas;
 import com.example.lab7.entity.JuegosUserDto;
 import com.example.lab7.repository.JuegosRepository;
+import com.sun.source.tree.LabeledStatementTree;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -64,6 +65,8 @@ public class JuegosController {
         return ResponseEntity.status(HttpStatus.CREATED).body(response);
 
     }
+
+
     @GetMapping(value="/juegos/usuario/{id}")
     public List<JuegosUserDto> listarJuegosUser(@PathVariable("id") String idStr){
         int idInt;
@@ -98,7 +101,7 @@ public class JuegosController {
                 return ResponseEntity.ok(response);
             } else {
                 response.put("estado", "error");
-                response.put("msg", "La distribuidora a actualizar no existe");
+                response.put("msg", "El juego a actualizar no existe");
                 return new ResponseEntity<>(response, HttpStatus.NOT_FOUND);
             }
         } else {
