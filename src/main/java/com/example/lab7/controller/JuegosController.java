@@ -18,7 +18,6 @@ import java.util.Optional;
 
 @RestController
 @CrossOrigin
-@RequestMapping("/juegos")
 public class JuegosController {
 
     @Autowired
