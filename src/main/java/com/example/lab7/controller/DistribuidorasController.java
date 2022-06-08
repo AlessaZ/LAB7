@@ -22,9 +22,9 @@ public class DistribuidorasController {
     public ResponseEntity<HashMap<String, Object>> guardarDistribuidoras(@RequestBody Distribuidoras distribuidora) {
         HashMap<String, Object> response = new HashMap<>();
 
-        distribuidorasRepository.save(distribuidora);
+        Distribuidoras distCreated = distribuidorasRepository.save(distribuidora);
         response.put("estado", "Creación exitosa");
-        response.put("distribuidora", distribuidora);
+        response.put("distribuidora", distCreated);
         return ResponseEntity.status(HttpStatus.CREATED).body(response);
     }
 
