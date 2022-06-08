@@ -13,6 +13,7 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -137,6 +138,14 @@ public class JuegosController {
     }
 
 
-
+    @ExceptionHandler
+    public ResponseEntity<HashMap<String, String>> gestionExcepcion(HttpServletRequest request) {
+        HashMap<String, String> response = new HashMap<>();
+        if (request.getMethod().equals("POST") || request.getMethod().equals("PUT")) {
+            response.put("estado", "error");
+            response.put("msg", "Debe enviar un juego");
+        }
+        return ResponseEntity.badRequest().body(response);
+    }
 
 }
