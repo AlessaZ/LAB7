@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @CrossOrigin
@@ -25,16 +26,67 @@ public class JuegosController {
         return juegosRepository.findAll();
     }
 
-    @PostMapping("/save")
-    public ResponseEntity<HashMap<String, Object>> guardarJuegos(@RequestBody Juegos juego) {
+    @GetMapping("/juego/{id}")
+    public ResponseEntity<HashMap<String,Object>> obtenerJuegoPorId(@PathVariable("id") String idStr) {
         HashMap<String, Object> response = new HashMap<>();
-        Juegos juegos=juegosRepository.save(juego);
-        response.put("estado", "Creación exitosa");
-        response.put("juego", juegos);
-        return ResponseEntity.status(HttpStatus.CREATED).body(response);
+        try {
+            Optional<Juegos> optionalJuegos = juegosRepository.findById(Integer.parseInt(idStr));
+            if (optionalJuegos.isPresent()) {
+                response.put("result", "success");
+                response.put("juego", optionalJuegos.get());
+                return ResponseEntity.ok(response);
+            } else {
+                response.put("result", "failure");
+                response.put("msg", "Juego no encontrado.");
+                return new ResponseEntity<>(response, HttpStatus.NOT_FOUND);
+            }
+        } catch (NumberFormatException e) {
+            response.put("result", "failure");
+            response.put("msg", "El ID debe ser un número entero positivo");
+            return ResponseEntity.badRequest().body(response);
+        }
     }
 
-    @DeleteMapping(value = "/delete/{id}")
+    @PostMapping("/juego")
+    public ResponseEntity<HashMap<String, Object>> guardarJuegos(
+            @RequestBody Juegos juego,
+            @RequestParam(value = "fetchId", required = false) boolean fetchId) {
+
+        HashMap<String, Object> response = new HashMap<>();
+
+        juegosRepository.save(juego);
+        if (fetchId) {
+            response.put("id", juego.getIdjuego());
+        }
+        response.put("estado", "creado");
+        return ResponseEntity.status(HttpStatus.CREATED).body(response);
+
+    }
+
+    @PutMapping("/juego")
+    public ResponseEntity<HashMap<String, Object>> actualizarJuego(@RequestBody Juegos juego) {
+
+        HashMap<String, Object> response = new HashMap<>();
+
+        if (juego.getIdjuego() != null && juego.getIdjuego() > 0) {
+            if (juegosRepository.existsById(juego.getIdjuego())) {
+                juegosRepository.save(juego);
+                response.put("estado", "Juego actualizado");
+                return ResponseEntity.ok(response);
+            } else {
+                response.put("estado", "error");
+                response.put("msg", "La distribuidora a actualizar no existe");
+                return new ResponseEntity<>(response, HttpStatus.NOT_FOUND);
+            }
+        } else {
+            response.put("estado", "error");
+            response.put("msg", "Debe enviar un ID");
+            return ResponseEntity.badRequest().body(response);
+        }
+
+    }
+
+    @DeleteMapping(value = "/juego/{id}")
     public ResponseEntity<HashMap<String,Object>> eliminarJuegos(@PathVariable("id") String idStr){
 
         HashMap<String, Object> responseMap = new HashMap<>();

@@ -11,7 +11,7 @@ public class Juegos implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int idjuego;
+    private Integer idjuego;
 
     @Size(min = 3, max = 45, message = "Debe contener entre 3 y 45 caracteres")
     private String nombre;
@@ -40,11 +40,11 @@ public class Juegos implements Serializable {
     @Valid
     private Generos genero;
 
-    public int getIdjuego() {
+    public Integer getIdjuego() {
         return idjuego;
     }
 
-    public void setIdjuego(int idjuego) {
+    public void setIdjuego(Integer idjuego) {
         this.idjuego = idjuego;
     }
 
