@@ -25,6 +25,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
         http.csrf().disable();
         http.authorizeRequests()
+                .antMatchers("/gameshop4/api/juego/**").authenticated()
+                .antMatchers("/gameshop4/api/plataforma/**").authenticated()
                 .antMatchers("/gameshop4/api/distribuidora/**").authenticated()
                 .antMatchers("/gameshop4/api/pais/**").authenticated()
                 .anyRequest().permitAll();
