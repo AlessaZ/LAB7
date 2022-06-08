@@ -67,7 +67,7 @@ public class JuegosController {
     }
 
 
-    @GetMapping(value="/juegos/usuario/{id}")
+    @GetMapping(value="/juego/usuario/{id}")
     public List<JuegosUserDto> listarJuegosUser(@PathVariable("id") String idStr){
         int idInt;
         try {
@@ -78,7 +78,7 @@ public class JuegosController {
         }
     }
 
-    @GetMapping(value = "/juegos/nocompra/{id}")
+    @GetMapping(value = "/juego/nocompra/{id}")
     public  List<Juegos> listarJuegosNoComprados(@PathVariable("id") String idStr){
         int idInt;
         try {
