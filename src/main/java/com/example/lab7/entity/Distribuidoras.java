@@ -12,7 +12,7 @@ public class Distribuidoras implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Min(value = 0, message = "Distribuidora no puede estar vacío")
-    private int iddistribuidora;
+    private Integer iddistribuidora;
 
     @Size(min=3, max = 50, message = "Debe contener entre 3 y 50 caracteres")
     private String nombre;
@@ -34,11 +34,11 @@ public class Distribuidoras implements Serializable {
     @Valid
     private Paises pais;
 
-    public int getIddistribuidora() {
+    public Integer getIddistribuidora() {
         return iddistribuidora;
     }
 
-    public void setIddistribuidora(int iddistribuidora) {
+    public void setIddistribuidora(Integer iddistribuidora) {
         this.iddistribuidora = iddistribuidora;
     }
 

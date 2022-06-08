@@ -12,17 +12,14 @@ import java.util.List;
 
 @RestController
 @CrossOrigin
-@RequestMapping("paises")
 public class PaisesController {
+
     @Autowired
     PaisesRepository paisesRepository;
 
-    @GetMapping("/listapaises/all")
+    @GetMapping("/pais")
     public List<Paises> obtenerPaises() {
-
         return paisesRepository.findAll();
     }
-
-
 
 }
