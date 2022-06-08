@@ -4,18 +4,21 @@ package com.example.lab7.controller;
 import com.example.lab7.entity.Distribuidoras;
 import com.example.lab7.entity.Juegos;
 import com.example.lab7.entity.Plataformas;
+import com.example.lab7.entity.JuegosUserDto;
 import com.example.lab7.repository.JuegosRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Optional;
 
 @RestController
 @CrossOrigin
+@RequestMapping("/juegos")
 public class JuegosController {
 
     @Autowired
@@ -61,6 +64,27 @@ public class JuegosController {
         response.put("estado", "creado");
         return ResponseEntity.status(HttpStatus.CREATED).body(response);
 
+    }
+    @GetMapping(value="/juegos/usuario/{id}")
+    public List<JuegosUserDto> listarJuegosUser(@PathVariable("id") String idStr){
+        int idInt;
+        try {
+            idInt = Integer.parseInt(idStr);
+            return juegosRepository.obtenerJuegosPorUser(idInt);
+        }catch (NumberFormatException e){
+            return new ArrayList<>();
+        }
+    }
+
+    @GetMapping(value = "/juegos/nocompra/{id}")
+    public  List<Juegos> listarJuegosNoComprados(@PathVariable("id") String idStr){
+        int idInt;
+        try {
+            idInt = Integer.parseInt(idStr);
+            return juegosRepository.obtenerJuegosNoCompradosPorUser(idInt);
+        }catch (NumberFormatException e){
+            return new ArrayList<>();
+        }
     }
 
     @PutMapping("/juego")
