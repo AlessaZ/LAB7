@@ -37,12 +37,13 @@ public class DistribuidorasController {
             } else {
                 response.put("result", "failure");
                 response.put("msg", "Distribuidora no encontrada");
+                return new ResponseEntity<>(response, HttpStatus.NOT_FOUND);
             }
         } catch (NumberFormatException e) {
             response.put("result", "failure");
             response.put("msg", "El ID debe ser un número entero positivo");
+            return ResponseEntity.badRequest().body(response);
         }
-        return ResponseEntity.badRequest().body(response);
     }
 
     @PostMapping("/distribuidora")
