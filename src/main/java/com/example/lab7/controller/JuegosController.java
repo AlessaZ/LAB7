@@ -9,6 +9,7 @@ import com.example.lab7.repository.JuegosRepository;
 import com.sun.source.tree.LabeledStatementTree;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -67,7 +68,7 @@ public class JuegosController {
     }
 
 
-    @GetMapping(value="/juego/usuario/{id}")
+    @GetMapping(value="/juego/usuario/{id}", produces = MediaType.APPLICATION_JSON_VALUE+";charset=utf-8")
     public List<JuegosUserDto> listarJuegosUser(@PathVariable("id") String idStr){
         int idInt;
         try {
@@ -78,7 +79,7 @@ public class JuegosController {
         }
     }
 
-    @GetMapping(value = "/juego/nocompra/{id}")
+    @GetMapping(value = "/juego/usuario/nocompra/{id}")
     public  List<Juegos> listarJuegosNoComprados(@PathVariable("id") String idStr){
         int idInt;
         try {
